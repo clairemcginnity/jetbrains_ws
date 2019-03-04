@@ -13,7 +13,7 @@ class Runner:
 
 		self.theta = 0
 		self.runner_pub = rospy.Publisher('position', Float32MultiArray, queue_size=10)
-		self.r = rospy.Rate(0.5)
+		self.r = rospy.Rate(1)
 		try:
         		self.runner()
    		except rospy.ROSInterruptException:

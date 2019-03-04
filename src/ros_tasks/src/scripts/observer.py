@@ -3,19 +3,28 @@ import rospy
 from std_msgs.msg import Float32MultiArray
 from std_msgs.msg import Float32
 
-def callback(coords):
-	x = coords.data[0]
-	y = coords.data[1]
-	z = coords.data[2]
+from sensor_msgs.msg import PointCloud
+from geometry_msgs.msg import Point32
 
-	print('x: ' + str(x) + ', y: ' + str(y) + ' z: ' + str(z))
-	#pub.publish(1.0)
 
-def observer():
-	rospy.Subscriber('position', Float32MultiArray, callback)
-	rospy.spin()
+class Observer:
+
+	def __init__(self):
+
+		self.observer_sub = rospy.Subscriber('position', Float32MultiArray, self.callback)
+		self.path_msg = PointCloud()
+
+		self.path_pub = rospy.Publisher('path_topic', PointCloud, queue_size=10)
+		self.path_msg.header.frame_id = "base_link"
+
+	def callback(self, coords):
+		x = coords.data[0]
+		y = coords.data[1]
+
+		self.path_msg.points.append(Point32(x,y,0))
+		self.path_pub.publish(self.path_msg)
 
 if __name__ == '__main__':
 	rospy.init_node('observer')
-	#pub = rospy.Publisher('check', Float32, queue_size=10)
-	observer()
+	observer = Observer()
+	rospy.spin()
