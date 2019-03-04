@@ -1,0 +1,2 @@
+ros_tasks
+-DCATKIN_DEVEL_PREFIX=/home/racecar/jetbrains_ws/devel -DCMAKE_INSTALL_PREFIX=/home/racecar/jetbrains_ws/install -G Unix Makefiles

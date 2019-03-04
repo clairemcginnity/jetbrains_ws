@@ -1,0 +1,8 @@
+prefix=/home/racecar/jetbrains_ws/install
+
+Name: ros_tasks
+Description: Description of ros_tasks
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/racecar/jetbrains_ws/install/lib 
+Requires: 
