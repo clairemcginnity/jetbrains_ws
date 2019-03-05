@@ -1,0 +1,7 @@
+<launch>
+
+	<node pkg="ros_tasks" type="runner.py" name="runner" />
+	 
+	<node pkg="ros_tasks" type="observer.py" name="observer" /> 
+
+</launch>

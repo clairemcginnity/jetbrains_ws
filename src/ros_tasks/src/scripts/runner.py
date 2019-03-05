@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 from std_msgs.msg import Float32
-from stg_msgs.msg import Float32MultiArray
+from std_msgs.msg import Float32MultiArray
 from std_msgs.msg import MultiArrayDimension
 import math
 
@@ -13,11 +13,11 @@ class Runner:
 
     self.theta = 0
     self.runner_pub = rospy.Publisher('position', Float32MultiArray, queue_size=10)
-    self.r = rospy.Rate(0.5)
+    self.r = rospy.Rate(1)
     try:
-            self.runner()
-      except rospy.ROSInterruptException:
-            pass
+        self.runner()
+    except rospy.ROSInterruptException:
+        pass
     
   def runner(self):
 
@@ -31,6 +31,9 @@ class Runner:
       msg.layout.dim.append(MultiArrayDimension())
       msg.layout.dim[0].label = "coords"
       msg.layout.dim[0].size = 3
+      msg.layout.data_offset  = 0
+      msg.data = [0]*3
+       
       msg.data[0] = x
       msg.data[1] = y
       msg.data[2] = 1.0
