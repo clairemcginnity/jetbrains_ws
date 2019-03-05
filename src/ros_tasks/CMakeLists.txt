@@ -197,3 +197,13 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+
+
+add_executable(runner src/scripts/runner.cpp)
+target_link_libraries(runner ${catkin_LIBRARIES})
+add_dependencies(runner ros_tasks_generate_messages_cpp)
+
+add_executable(observer src/scripts/observer.cpp)
+target_link_libraries(observer ${catkin_LIBRARIES})
+add_dependencies(observer ros_tasks_generate_messages_cpp)
