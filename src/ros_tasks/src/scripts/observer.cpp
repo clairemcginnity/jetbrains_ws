@@ -3,20 +3,17 @@
 #include "std_msgs/Float32MultiArray.h"
 #include <string>
 
-/**
- * This tutorial demonstrates simple receipt of messages over the ROS system.
- */
 using namespace std;
 void observerCallback(const std_msgs::Float32MultiArray::ConstPtr& msg)
 {
-//  msg->data;
+//  print coordinates to console in the form [x, y, z]
 	std::cout<< "[" << msg->data[0] << ", " << msg->data[1] <<  ", "  << msg->data[2] << "]" << std::endl;
 
 }
 
 int main(int argc, char **argv)
 {
-  
+  //initialize subscriber node and subcribe to position topic to which runner publishes
   ros::init(argc, argv, "observer");
   ros::NodeHandle n;
   ros::Subscriber sub = n.subscribe("position", 1000, observerCallback);
